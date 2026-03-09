@@ -1,0 +1,69 @@
+/*
+Template Name: Carporate
+File: Layout CSS
+Author: TemplatesOnWeb
+Author URI: https://www.templateonweb.com/
+Licence: <a href="https://www.templateonweb.com/license">Website Template Licence</a>
+*/
+/*********************about****************/
+.sell h6{
+border-bottom:1px solid #eee;
+font-size:14px;
+font-weight:normal;
+padding-bottom:20px;
+margin-bottom:20px;
+}
+#center_2{
+background:#f4f4f4
+}
+.center_1_left_inner h6{
+display:block;
+font-size:70px;
+color:#FF6A3F;
+}
+.center_1_left_inner h4 a{
+color: #767676;
+font-size:32px;
+font-weight:700;
+text-decoration:none;
+}
+.center_1_left_inner{
+background:#fff;
+padding:15px; 
+ }
+#team_h{
+background:#f4f4f4; 
+ }
+/*********************about_end****************/
+
+
+@media screen and (max-width : 767px){
+.sell {
+ margin-top:0!important;
+ }
+.sell h1{
+text-align:center;
+ }
+.sell h5{
+text-align:center;
+ }
+.center_1_left_inner {
+ margin-bottom:10px; 
+  } 
+.skill_1r h6{
+text-align:center;
+margin-top:15px; 
+ }
+.skill_1r h1{
+text-align:center; 
+ }
+.skill_1l{
+margin-top:15px; 
+ }
+ }
+@media (min-width:768px) and (max-width:991px) {
+
+ }
+@media (min-width:992px) and (max-width:1200px) {
+
+ }

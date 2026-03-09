@@ -1,0 +1,241 @@
+/*
+Template Name: Carporate
+File: Layout CSS
+Author: TemplatesOnWeb
+Author URI: https://www.templateonweb.com/
+Licence: <a href="https://www.templateonweb.com/license">Website Template Licence</a>
+*/
+/*********************blog****************/
+#blog_pg a:hover{
+color: #FF6A3F; 
+ }
+.blog_pg1l1 h6{
+background: #454a510d;
+padding: 11px 17px;
+display:inline-block;
+border-radius:5px; 
+ }
+.blog_pg1l1ir ul li a {
+background: #FF6A3F;
+width: 35px;
+height: 35px;
+}
+.blog_pg1l1ir ul li a i {
+line-height: 35px;
+}
+.blog_pg1l1{
+border-bottom: 2px dashed #e4e4e4;
+padding-bottom:30px;
+margin-bottom:30px; 
+ }
+ 
+.blog_pg1r1 .form-control {
+height: 49px;
+font-size: 16px;
+border-color: #eee;
+box-shadow: none;
+border-radius: 0;
+border:none;
+letter-spacing: 0.8px;
+}
+.blog_pg1r1 .input-group .btn {
+background:none;
+margin-left: 0!important;
+padding: 10.1px 20px;
+font-size: 18px;
+border-radius: 0;
+border:none;
+color:#333;
+}
+.blog_pg1r1 .input-group {
+border:2px solid #eee;
+}
+.blog_pg1r1 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+color: #999!important;
+opacity: 1; /* Firefox */
+font-weight:bold;
+}
+.blog_pg1r2{
+padding: 15px 40px 25px 40px;
+background: #3b599805;
+border: 2px dashed #eee;
+ }
+.bg_head {
+background: #FF6A3F;
+color:#fff;
+text-align:center;
+padding:10px; 
+ }
+.blog_pg1r2 h6 i{
+background: #FF6A3F;
+color:#fff;
+display:inline-block;
+text-align:center;
+width:40px;
+height:40px;
+border-radius:50px;
+line-height:40px;
+margin-right:5px;
+font-size:18px; 
+ }
+.blog_pg1r2 h6 i:hover{
+background:#fff;
+color:#FF6A3F; 
+ }
+.blog_pg1r2 h6 {
+border-bottom: 1px solid #f0f0f1;
+padding-bottom:15px;
+ }
+.blog_pg1r2 .footer_1i1{
+border-bottom: 1px solid #f0f0f1;
+margin-bottom:15px;
+ }
+.blog_pg1r3{
+padding: 15px 40px 25px 40px;
+background: #3b599805;
+border: 2px dashed #eee;
+ }
+.blog_pg1r3 h6 a i{
+margin-right:3px;
+vertical-align:middle; 
+ }
+.blog_pg1r3 h6{
+border-bottom: 1px solid #f0f0f1;
+padding-bottom:15px;
+margin-bottom:15px; 
+ }
+.blog_pg1r3 .footer_1i2 ul li a{
+padding: 5px 8px!important; 
+background:#4F4F4F!important;
+color:#fff!important;
+ }
+.blog_pg1r3 .footer_1i2 ul li a:hover{
+background:#FF6A3F!important;
+color:#fff!important;
+ }
+ 
+.blog_pg1dt ul li a{
+display:block;
+margin-right: 4px;
+-webkit-transition: 300ms all;
+-o-transition: 300ms all;
+transition: 300ms all;
+margin-bottom: 5px;
+padding: 6px 14px;
+font-size: 13px;
+border-radius: 5px;
+border: 1px solid transparent;
+background:#f6f5fb;
+ }
+.blog_pg1dt ul li a:hover{
+background: #FF6A3F;
+color:#fff!important; 
+ }
+.blog_pg1dt1{
+background: #fbfcfd;
+padding: 50px 60px 50px 60px;
+border: 2px dashed #eee; 
+ }
+.blog_pg1dt1 .form-control{
+border: 2px solid rgb(243, 245, 255);
+background:#fff;
+font-size:14px;
+color:#999;
+padding: 20px;
+margin-bottom:20px;
+ }
+.blog_pg1dt1 .form_1{
+height:150px;
+ }
+.blog_pg1dt1i{
+border-bottom:1px solid #eee;
+ }
+ 
+ blockquote {
+margin: 20px 0 30px;
+font-size: 15px;
+border-left: 5px solid #FF6A3F;
+background: #fbfcfd;
+padding: 25px 35px 15px;
+}
+.sign {
+text-align: right;
+font-weight: 600;
+font-size: 14px;
+}
+/*********************blog_end****************/
+
+
+@media screen and (max-width : 767px){
+.blog_pg1l1 h6 a{
+line-height:1.6em; 
+ }
+.blog_pg1l1 h2{
+text-align:center; 
+ }
+.blog_pg1l1il{
+ text-align:center; 
+  } 
+.blog_pg1l1ir{
+ text-align:center!important; 
+ margin-top:15px;
+  } 
+.blog_pg1r{
+margin-top:15px; 
+ }
+.blog_pg1r2 {
+padding: 15px 15px 25px 15px;
+}
+.blog_pg1r3 {
+padding: 15px 15px 25px 15px;
+}
+
+.blog_pg1dt1 {
+padding: 30px 20px 30px 20px;
+}
+.blog_pg1dt1  h3{
+text-align:center; 
+ }
+.blog_pg1dt1il img{
+width:80px!important;
+height:80px!important;
+margin-bottom:10px;
+ }
+.blog_pg1dt1il{
+text-align:center;
+ }
+.blog_pg1dt1ir .font_16{
+font-size:14px; 
+ }
+.blog_pg1dt1ir h5 a{
+float:none!important;
+margin-left:5px;
+ }
+.blog_pg1dt1ir h5 {
+line-height:1.6em;
+ }
+.blog_pg1dt1o h5{
+text-align:center; 
+ }
+ }
+@media (min-width:768px) and (max-width:991px) {
+.blog_pg1r2 {
+padding: 15px 15px 25px 15px;
+}
+.blog_pg1r3 {
+padding: 15px 15px 25px 15px;
+}
+.blog_pg1dt1ir .font_16{
+font-size:14px; 
+ }
+.blog_pg1dt1ir .font_13{
+font-size:12px; 
+ }
+.blog_pg1dt1 {
+padding: 30px 20px 30px 20px;
+}
+
+ }
+@media (min-width:992px) and (max-width:1200px) {
+
+ }
