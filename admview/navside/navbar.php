@@ -1,3 +1,9 @@
+<?php
+$navbar_user = db_get_one("SELECT full_name, role, avatar FROM users WHERE id = ?", [$_SESSION['user_id'] ?? 0]) ?: [];
+$navbar_name = $navbar_user['full_name'] ?? ($_SESSION['full_name'] ?? 'User');
+$navbar_role = $navbar_user['role'] ?? ($_SESSION['role'] ?? 'user');
+$navbar_avatar = get_user_avatar_src($navbar_user['avatar'] ?? '');
+?>
 <nav class="app-header navbar navbar-expand bg-body">
     <div class="container-fluid">
         <ul class="navbar-nav">
@@ -6,7 +12,7 @@
                     <i class="bi bi-list"></i>
                 </a>
             </li>
-            <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Hallo <?= $_SESSION['full_name'] ?></a></li>
+            <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Hallo <?= htmlspecialchars($navbar_name, ENT_QUOTES, 'UTF-8') ?></a></li>
         </ul>
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
@@ -23,7 +29,7 @@
                     <a href="#" class="dropdown-item">
                         <div class="d-flex">
                             <div class="flex-shrink-0">
-                                <img src="../admin/assets/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 rounded-circle me-3" />
+                                <img src="<?= htmlspecialchars($navbar_avatar, ENT_QUOTES, 'UTF-8') ?>" alt="User Avatar" class="img-size-50 rounded-circle me-3" />
                             </div>
                             <div class="flex-grow-1">
                                 <h3 class="dropdown-item-title">
@@ -41,7 +47,7 @@
                     <a href="#" class="dropdown-item">
                         <div class="d-flex">
                             <div class="flex-shrink-0">
-                                <img src="../admin/assets/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 rounded-circle me-3" />
+                                <img src="<?= htmlspecialchars($navbar_avatar, ENT_QUOTES, 'UTF-8') ?>" alt="User Avatar" class="img-size-50 rounded-circle me-3" />
                             </div>
                             <div class="flex-grow-1">
                                 <h3 class="dropdown-item-title">
@@ -85,14 +91,14 @@
             </li>
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="" class="user-image rounded-circle shadow" alt="User Image" />
-                    <span class="d-none d-md-inline"><?= $_SESSION['full_name'] ?></span>
+                    <img src="<?= htmlspecialchars($navbar_avatar, ENT_QUOTES, 'UTF-8') ?>" class="user-image rounded-circle shadow" alt="User Image" />
+                    <span class="d-none d-md-inline"><?= htmlspecialchars($navbar_name, ENT_QUOTES, 'UTF-8') ?></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <li class="user-header text-bg-primary">
-                        <img src="" class="rounded-circle shadow" alt="User Image" />
+                        <img src="<?= htmlspecialchars($navbar_avatar, ENT_QUOTES, 'UTF-8') ?>" class="rounded-circle shadow" alt="User Image" />
                         <p>
-                            <?= $_SESSION['full_name'] ?> - <?= $_SESSION['role'] ?>
+                            <?= htmlspecialchars($navbar_name, ENT_QUOTES, 'UTF-8') ?> - <?= htmlspecialchars($navbar_role, ENT_QUOTES, 'UTF-8') ?>
                         </p>
                     </li>
                     <li class="user-body">
@@ -104,7 +110,7 @@
                     </li>
                     <li class="user-footer">
                         <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
-                        <a href="logout.php" class="btn btn-default btn-flat float-end">Sign out</a>
+                        <a href="<?= app_url('logout.php') ?>" class="btn btn-default btn-flat float-end">Sign out</a>
                     </li>
                 </ul>
             </li>

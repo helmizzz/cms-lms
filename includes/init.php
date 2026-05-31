@@ -6,6 +6,10 @@ define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'carporate_db');
+// define('DB_HOST', 'sql302.infinityfree.com');
+// define('DB_USER', 'if0_41394957');
+// define('DB_PASS', 'bYKpqNpWrY');
+// define('DB_NAME', 'if0_41394957_carporate_db');
 
 // Include global functions
 require_once 'functions.php';

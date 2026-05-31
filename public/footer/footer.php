@@ -1,84 +1,67 @@
 <?php
-$site_name = get_setting('site_name', 'LEXALINK ID');
-$name_parts = explode(' ', $site_name);
+$site_name = get_setting("site_name", "LEXALINK ID");
+$name_parts = explode(" ", $site_name);
 $last_word = array_pop($name_parts);
-$first_part = implode(' ', $name_parts);
+$first_part = implode(" ", $name_parts);
 
-// Fetch latest news for footer
-$footer_news = db_get_all("SELECT * FROM posts WHERE type = 'news' AND status = 'published' ORDER BY created_at DESC LIMIT 3");
-
-// Fetch gallery for footer
-$footer_gallery = db_get_all("SELECT * FROM gallery ORDER BY created_at DESC LIMIT 9");
+$footer_news = db_get_all("SELECT * FROM posts WHERE type = 'blog' AND status = 'published' ORDER BY created_at DESC LIMIT 2");
 ?>
-<section id="footer" class="pt-5">
+<section id="footer" class="py-5" style="background: #001529; border-top: 4px solid var(--secondary-color);">
   <div class="container">
-   <div class="row footer_1">
-	  <div class="col-md-3">
-	   <div class="footer_1i">
-	    <h3 class="mb-4"><a class="navbar-brand text-white pt-1 m-0" href="index.php"><?= $first_part ?> <span class="col_oran"><?= $last_word ?></span></a></h3>
-		<p class="col_light font_15 mb-4"><?= get_setting('about_summary', 'We provide professional consulting and financial solutions to help your business grow.') ?></p>
-		<ul class="social-network social-circle mb-0 mt-2">
-			<li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
-			<li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-			<li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-			<li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-		</ul>
-	   </div>
-	  </div>
-	  <div class="col-md-3">
-	   <div class="footer_1i">
-	    <h4 class="mb-4 text-white">Latest News</h4>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="footer_logo mb-4">
+           <h3 class="fw-800 m-0"><span style="color: white;"><?= $first_part ?></span> <span style="color: var(--secondary-color);"><?= $last_word ?></span></h3>
+        </div>
+        <p class="text-white-50 small lh-lg mb-4"><?= get_setting("about_summary", "Solusi terintegrasi untuk kebutuhan riset hukum, kepatuhan regulasi, dan berita hukum terkini di Indonesia.") ?></p>
+        <div class="social-links">
+           <a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fa fa-facebook"></i></a>
+           <a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fa fa-twitter"></i></a>
+           <a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fa fa-linkedin"></i></a>
+           <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i class="fa fa-instagram"></i></a>
+        </div>
+      </div>
+      
+      <div class="col-md-4 mb-4">
+        <h5 class="text-white fw-bold mb-4">Berita Terbaru</h5>
         <?php foreach ($footer_news as $news): ?>
-            <div class="row mb-3">
-                <div class="col-md-3 col-3">
-                <div class="footer_1i1l">
-                    <?php if ($news['image']): ?>
-                        <img src="assets/img/posts/<?= $news['image'] ?>" alt="news" class="rounded-circle w-10" style="height: 10px; object-fit: cover;">
-                    <?php else: ?>
-                        <div class="rounded-circle bg-secondary w-100 d-flex align-items-center justify-content-center" style="height: 10px;">
-                            <i class="fa fa-newspaper-o text-white"></i>
-                        </div>
-                    <?php endif; ?>
-                </div>
-                </div>
-                <div class="col-md-9 px-0 col-9">
-                <div class="footer_1i1r">
-                    <p class="font_15 mb-0"><a class="col_light" href="blog_detail.php?slug=<?= $news['slug'] ?>"><?= substr($news['title'], 0, 40) ?>...</a></p>
-                    <p class="col_oran font_13 fw-bold"><?= date('M d, Y', strtotime($news['created_at'])) ?></p>
-                </div>
-                </div>
+          <div class="d-flex mb-3 align-items-center">
+            <div class="flex-shrink-0" style="width: 60px; height: 60px;">
+              <img src="<?= $news["image"] ? "assets/img/posts/".$news["image"] : "img/default_blog.jpg" ?>" class="w-100 h-100 rounded object-fit-cover" alt="news">
             </div>
+            <div class="flex-grow-1 ms-3">
+              <h6 class="mb-0"><a href="blog_detail.php?slug=<?= $news["slug"] ?>" class="text-white text-decoration-none small"><?= substr($news["title"], 0, 50) ?>...</a></h6>
+              <span class="text-warning extra-small"><?= date("d M Y", strtotime($news["created_at"])) ?></span>
+            </div>
+          </div>
         <?php endforeach; ?>
-	   </div>
-	  </div>
-	  <div class="col-md-3">
-	   <div class="footer_1i2">
-	    <h4 class="mb-4 text-white">Quick Links</h4>
-	    <ul>
-		 <li class="d-inline-block"><a href="index.php">Home</a></li>
-		 <li class="d-inline-block"><a href="about.php">About Us</a></li>
-		 <li class="d-inline-block"><a href="blog.php">Blog</a></li>
-		 <li class="d-inline-block"><a href="services.php">Services</a></li>
-		 <li class="d-inline-block"><a href="team.php">Team</a></li>
-		 <li class="d-inline-block"><a href="contact.php">Contact Us</a></li>
-		 <li class="d-inline-block"><a href="adminbaru/index.php">LMS Login</a></li>
-		</ul>
-	   </div>
-	  </div>
-	  <div class="col-md-3">
-	   <div class="footer_1i2">
-	    <h4 class="mb-4 text-white">Gallery</h4>
-	    <div class="footer_1i2i row g-2">
-            <?php foreach ($footer_gallery as $img): ?>
-                <div class="col-4">
-                    <div class="footer_1i2i1">
-                        <a href="#"><img src="assets/img/gallery/<?= $img['image_path'] ?>" class="w-100 rounded" alt="gallery" style="height: 60px; object-fit: cover;"></a>
-                    </div> 
-                </div>
-            <?php endforeach; ?>
-		</div>
-	   </div>
-	  </div>
-   </div>
+      </div>
+      
+      <div class="col-md-2 mb-4">
+        <h5 class="text-white fw-bold mb-4">Navigasi</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="index.php" class="text-white-50 text-decoration-none small hover-text-warning transition">Beranda</a></li>
+          <li class="mb-2"><a href="about.php" class="text-white-50 text-decoration-none small hover-text-warning transition">Tentang Kami</a></li>
+          <li class="mb-2"><a href="blog.php" class="text-white-50 text-decoration-none small hover-text-warning transition">Berita Hukum</a></li>
+          <li class="mb-2"><a href="services.php" class="text-white-50 text-decoration-none small hover-text-warning transition">Produk Hukum</a></li>
+          <li class="mb-2"><a href="contact.php" class="text-white-50 text-decoration-none small hover-text-warning transition">Kontak</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-md-2 mb-4">
+        <h5 class="text-white fw-bold mb-4">Bantuan</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none small hover-text-warning transition">Pusat Bantuan</a></li>
+          <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none small hover-text-warning transition">Syarat & Ketentuan</a></li>
+          <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none small hover-text-warning transition">Kebijakan Privasi</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
- </section>
+</section>
+<style>
+.extra-small { font-size: 11px; }
+.object-fit-cover { object-fit: cover; }
+.hover-text-warning:hover { color: var(--secondary-color) !important; padding-left: 5px; }
+.transition { transition: all 0.3s ease; }
+</style>

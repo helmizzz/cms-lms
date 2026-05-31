@@ -11,7 +11,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $phone = clean($_POST['phone']);
         
         db_query("UPDATE users SET full_name = ?, phone = ? WHERE id = ?", [$full_name, $phone, $user_id]);
+        $_SESSION['full_name'] = $full_name;
         $success_msg = "Profil berhasil diperbarui!";
+    }
+
+    if (isset($_POST['update_avatar'])) {
+        $allowed_types = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+        $file_type = $_FILES['avatar']['type'] ?? '';
+        $extension = strtolower(pathinfo($_FILES['avatar']['name'] ?? '', PATHINFO_EXTENSION));
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+        $image_info = isset($_FILES['avatar']['tmp_name']) ? @getimagesize($_FILES['avatar']['tmp_name']) : false;
+
+        if (!isset($_FILES['avatar']) || $_FILES['avatar']['error'] !== UPLOAD_ERR_OK) {
+            $error_msg = "Pilih foto profil terlebih dahulu.";
+        } elseif (!$image_info || !in_array($file_type, $allowed_types, true) || !in_array($extension, $allowed_extensions, true)) {
+            $error_msg = "Format foto profil harus JPG, PNG, WEBP, atau GIF.";
+        } else {
+            $current_user = db_get_one("SELECT avatar FROM users WHERE id = ?", [$user_id]);
+            $uploaded_file = upload_image($_FILES['avatar'], "../assets/img/avatars/");
+
+            if ($uploaded_file) {
+                if ($current_user && $current_user['avatar'] && $current_user['avatar'] !== 'default_avatar.png') {
+                    @unlink("../assets/img/avatars/" . $current_user['avatar']);
+                }
+
+                db_query("UPDATE users SET avatar = ? WHERE id = ?", [$uploaded_file, $user_id]);
+                $success_msg = "Foto profil berhasil diperbarui!";
+            } else {
+                $error_msg = "Gagal mengunggah foto profil.";
+            }
+        }
     }
     
     if (isset($_POST['change_password'])) {
@@ -87,6 +116,15 @@ include 'navside/sidebar.php';
         margin: 0 auto 20px;
         color: #9BA4AD;
         font-size: 60px;
+    }
+    .profile-avatar-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 20px;
+        display: block;
+        border: 4px solid #F3F5F7;
     }
     .profile-name {
         font-size: 20px;
@@ -205,11 +243,14 @@ include 'navside/sidebar.php';
                 <!-- Column Left -->
                 <div class="col-md-4 mb-4">
                     <div class="profile-card h-100">
-                        <div class="avatar-placeholder">
-                            <i class="bi bi-person-fill"></i>
-                        </div>
+                        <img src="<?= htmlspecialchars(get_user_avatar_src($user_data['avatar'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" alt="User Avatar" class="profile-avatar-img">
                         <h3 class="profile-name"><?= $user_data['full_name'] ?></h3>
                         <p class="profile-email"><?= $user_data['email'] ?></p>
+                        <form method="POST" enctype="multipart/form-data" class="mt-3">
+                            <label class="form-label text-start d-block">Foto Profil</label>
+                            <input type="file" name="avatar" class="form-control" accept="image/jpeg,image/png,image/webp,image/gif" required>
+                            <button type="submit" name="update_avatar" class="btn btn-primary btn-sm w-100 mt-3">Simpan Foto</button>
+                        </form>
                         
                         <!-- <div class="mt-4">
                             <div class="membership-badge">

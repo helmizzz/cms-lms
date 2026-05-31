@@ -69,6 +69,37 @@ function get_setting($key, $default = "") {
 }
 
 /**
+ * Build project-relative URLs safely from root or admin subfolders.
+ */
+function app_url($path = "") {
+    $script_dir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? ''));
+
+    if (preg_match('#/(adminbaru|admview)$#', $script_dir)) {
+        $script_dir = dirname($script_dir);
+    }
+
+    $script_dir = rtrim($script_dir, '/');
+    $path = ltrim($path, '/');
+
+    return ($script_dir === '' ? '' : $script_dir) . '/' . $path;
+}
+
+/**
+ * Get a display-safe avatar URL from the stored avatar filename.
+ */
+function get_user_avatar_src($avatar = "") {
+    $avatar = basename((string)$avatar);
+    $avatar_dir = __DIR__ . '/../assets/img/avatars/';
+
+    if ($avatar && file_exists($avatar_dir . $avatar)) {
+        return app_url('assets/img/avatars/' . $avatar);
+    }
+
+    $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><rect width="160" height="160" rx="80" fill="#DDE2E5"/><circle cx="80" cy="62" r="28" fill="#9BA4AD"/><path d="M31 139c8-28 26-42 49-42s41 14 49 42" fill="#9BA4AD"/></svg>';
+    return 'data:image/svg+xml,' . rawurlencode($svg);
+}
+
+/**
  * Generate Slug
  */
 function generate_slug($string) {
@@ -137,9 +168,9 @@ function db_execute($sql, $params = []) {
  */
 function redirect_by_role($role) {
     if ($role === 'admin') {
-        header('Location: ../admview/index.php');
+        header('Location: ' . app_url('admview/index.php'));
     } else {
-        header('Location: ../adminbaru/index.php');
+        header('Location: ' . app_url('adminbaru/index.php'));
     }
     exit;
 }
@@ -149,7 +180,7 @@ function redirect_by_role($role) {
  */
 function check_access($allowed_roles = []) {
     if (!is_authenticated()) {
-        header('Location: ../adminbaru/login.php');
+        header('Location: ' . app_url('login.php'));
         exit;
     }
     
